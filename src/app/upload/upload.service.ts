@@ -4,10 +4,10 @@ import {
   HttpRequest,
   HttpEventType,
   HttpResponse,
-} from '@angular/common/http'
-import { Subject } from 'rxjs/Subject'
-import { Observable } from 'rxjs/Observable'
-import { RoutingBackend } from '../routingBackend';
+} from '@angular/common/http';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { environment } from '../../environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
@@ -37,7 +37,7 @@ export class UploadService {
 
       // create a http-post request and pass the form
       // tell it to report the upload progress
-      const req = new HttpRequest('POST', RoutingBackend.serverURL + RoutingBackend.upload, formData, {
+      const req = new HttpRequest('POST', environment.serverURL + environment.upload, formData, {
         reportProgress: true
       });
 
