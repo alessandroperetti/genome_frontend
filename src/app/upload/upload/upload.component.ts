@@ -18,14 +18,14 @@ export class UploadComponent {
   public uploadSuccessful = false;
   public cancel = false;
 
-  constructor(public uploadService: UploadService) {}
+  constructor(public uploadService: UploadService) { }
 
   addFiles() {
     this.file.nativeElement.click();
   }
 
   onFilesAdded() {
-    this.upload= true;
+    this.upload = true;
     this.cancel = true;
     const files: { [key: string]: File } = this.file.nativeElement.files;
     for (let key in files) {
@@ -33,28 +33,29 @@ export class UploadComponent {
         this.files.add(files[key]);
       }
     }
+    console.log("Files: ", files);
   }
 
-  cancelFiles(){
+  cancelFiles() {
     this.files.clear();
     this.upload = false;
     this.cancel = false;
-    this.uploadService.showCompletation = false;
+    this.progress = null;
   }
 
   uploadAction() {
-  
+
     this.uploading = true;
-  
+
     this.progress = this.uploadService.upload(this.files);
 
     let allProgressObservables = [];
     for (let key in this.progress) {
       allProgressObservables.push(this.progress[key].progress);
     }
-  
+
     this.upload = false;
-  
+
     this.showCancelButton = false;
   }
 }

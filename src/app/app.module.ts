@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { UploadModule } from './upload/upload.module'
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {UploadService} from './upload/upload.service';
+import { UploadService } from './upload/upload.service';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { UploadComponent } from './upload/upload/upload.component';
@@ -29,7 +29,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } //debugging
+      { enableTracing: true } 
     )
   ],
   providers: [UploadService,

@@ -1,25 +1,32 @@
 <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
-<div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+<div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
     <h1 mat-dialog-title>Upload Files</h1>
     <div>
-        <button [disabled]="" mat-raised-button color="primary" class="add-files-btn"
-            (click)="addFiles()">
-            Add Files
-        </button>
-        <button [disabled]="!cancel" mat-raised-button color="primary" class="add-files-btn"
-        (click)="cancelFiles()">
-        Cancel
-    </button>
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+            <button [disabled]="" mat-raised-button color="primary" class="add-files-btn" (click)="addFiles()">
+                Add Files
+            </button>
+            <button [disabled]="!cancel" mat-raised-button color="primary" class="add-files-btn"
+                (click)="cancelFiles()">
+                Cancel
+            </button>
+        </div>
     </div>
-    <mat-list>
-        <mat-list-item *ngFor="let file of files">
-            <h4 mat-line> {{file.name}} </h4>
-            <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[file.name].progress | async"></mat-progress-bar>
-        </mat-list-item>
-    </mat-list>
-    
-    <button mat-raised-button color="primary" [disabled]="!upload" (click)="uploadAction()">
-        Upload file/files
-    </button>
-    <div *ngIf='uploadService.showCompletation'> All Uploads completed! </div>
+    <mat-divider></mat-divider>
+    <mat-card>
+        <mat-list>
+            <mat-list-item *ngFor="let file of files; last as last">
+                <h4 mat-line> {{file.name}} </h4>
+                <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[file.name].progress | async">
+                </mat-progress-bar>
+                <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+            </mat-list-item>
+        </mat-list>
+
+        <div fxLayout="row" fxLayoutAlign="end end">
+            <button mat-raised-button color="primary" [disabled]="!upload" (click)="uploadAction()">
+                Upload file/files
+            </button>
+        </div>
+    </mat-card>
 </div>

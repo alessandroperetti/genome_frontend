@@ -8,6 +8,8 @@ import {
 import { Subject } from 'rxjs/Subject'
 import { Observable } from 'rxjs/Observable'
 import { RoutingBackend } from '../routingBackend';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 
 @Injectable({
@@ -16,9 +18,10 @@ import { RoutingBackend } from '../routingBackend';
 export class UploadService {
 
   public numFiles: number;
-  public showCompletation: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private matSnackBar: MatSnackBar) {}
   
   public upload(files: Set<File>):
     { [key: string]: { progress: Observable<number> } } {
@@ -52,7 +55,6 @@ export class UploadService {
           // pass the percentage into the progress-stream
           progress.next(percentDone);
         } else if (event instanceof HttpResponse) {
-          console.log("Progress before end: ", progress);
           // Close the progress-stream if we get an answer form the API
           // The upload is complete
           progress.complete();
@@ -74,8 +76,9 @@ export class UploadService {
     this.numFiles = this.numFiles - 1; 
     console.log("num: " , this.numFiles);
     if(this.numFiles === 0){
-      this.showCompletation = true;
-      console.log(true);
+      this.matSnackBar.open('Files have been uploded', 'Undo', {
+        duration: 3000
+      });
     }
     
   }
