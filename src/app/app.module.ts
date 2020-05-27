@@ -5,25 +5,32 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UploadService } from './upload/upload.service';
 import { AdminComponent } from './admin/admin.component';
-import { LoginComponent } from './login/login.component';
+import { ListComponent } from './list/list.component';
 import { UploadComponent } from './upload/upload/upload.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomRouteReuseStrategy } from './router-strategy';
 import { RouteReuseStrategy } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'list', component: ListComponent },
   { path: 'upload', component: UploadComponent },
 ];
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
-    LoginComponent
+    ListComponent
   ],
   imports: [
+    FlexLayoutModule,
+    MatProgressSpinnerModule,
+    MatListModule,
     BrowserModule,
     UploadModule,
     BrowserAnimationsModule,

@@ -24,7 +24,6 @@ import {
       }
       /** Whether this route should be re used or not */
       let shouldReuse = false;
-      console.log('[router-reuse] checking if this route should be re used or not', route);
       if ( route.routeConfig.data ) {
         route.routeConfig.data.reuse ? shouldReuse = true : shouldReuse = false;
       }
@@ -36,7 +35,6 @@ import {
      * Stores the detached route.
      */
     store( route: ActivatedRouteSnapshot, handler: DetachedRouteHandle ): void {
-      console.log('[router-reuse] storing handler');
       if ( handler ) {
         this.handlers[this.getUrl(route)] = handler;
       }
@@ -47,7 +45,6 @@ import {
      * @param route Stores the detached route.
      */
     shouldAttach(route: ActivatedRouteSnapshot): boolean {
-      console.log('[router-reuse] checking if it should be re attached');
       return !!this.handlers[this.getUrl(route)];
     }
   
@@ -70,7 +67,6 @@ import {
     shouldReuseRoute(future: ActivatedRouteSnapshot, current: ActivatedRouteSnapshot): boolean {
       /** We only want to reuse the route if the data of the route config contains a reuse true boolean */
       let reUseUrl = false;
-      console.log("inside***");  
       if ( future.routeConfig ) {
         if (future.routeConfig.data ) {
           reUseUrl = future.routeConfig.data.reuse;
@@ -96,8 +92,6 @@ import {
       /** The url we are going to return */
       if ( route.routeConfig ) {
         const url = route.routeConfig.path;
-        console.log('[router-reuse] returning url', url);
-  
         return url;
       }
     }

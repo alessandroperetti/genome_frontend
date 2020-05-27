@@ -1,0 +1,5 @@
+<h1>Files List</h1>
+<mat-spinner fxLayout="row" fxLayoutAlign="center center" *ngIf="showSpinner" mode="indeterminate"></mat-spinner>
+<mat-list>
+    <mat-list-item *ngFor="let file of filesList"> {{ file.fileName }} - {{file.dimension}} {{file.precision}} </mat-list-item>
+</mat-list>
